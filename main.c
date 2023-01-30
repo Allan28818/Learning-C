@@ -1,10 +1,13 @@
 #include <stdio.h>
+#include <math.h>
 
 void askForTheUser() {
-  char response = "";
+  char response[3] = "";
 
   printf("Do you want to see the printf() samples?\n");
   scanf("%s", &response);
+
+  printf("Your response is %s", response);
 }
 
 void printSample() {
@@ -26,10 +29,29 @@ void printSample() {
   printf("Integer number hexadecimal format %x\n", 227);
 }
 
+void bhaskarasFormula() {  
+  float a, b, c;
+  printf("Type a value for a\n");
+  scanf("%e", &a);
+  printf("Type a value for b\n");
+  scanf("%e", &b);
+  printf("Type a value for c\n");
+  scanf("%e", &c);
+
+  double delta = pow(b, 2.0) - 4 * a * c;
+  double x1 = (-b + pow(delta, 0.5)) / 2 * a;
+  double x2 = (-b - pow(delta, 0.5)) / 2 * a;
+
+  printf("These are your values:\n");
+  printf("Delta: %f\n", delta);
+  printf("x1 %f\n", x1);
+  printf("x2 %f\n", x2);
+}
+
 int main() {
   askForTheUser();
   printSample();
- 
+  bhaskarasFormula();
 
   return 0;
 }
