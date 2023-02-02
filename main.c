@@ -42,6 +42,12 @@ void bhaskarasFormula() {
   double x1 = (-b + pow(delta, 0.5)) / 2 * a;
   double x2 = (-b - pow(delta, 0.5)) / 2 * a;
 
+  if(delta < 0) {
+    printf("Delta is negative. So the result isn't inside the sef of real numbers!\n");
+    printf("Delta: %s\n", delta);
+    return;
+  }
+
   printf("These are your values:\n");
   printf("Delta: %f\n", delta);
   printf("x1 %f\n", x1);
