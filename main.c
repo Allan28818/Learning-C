@@ -1,13 +1,19 @@
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
-void askForTheUser() {
-  char response[3] = "";
+const char* askForTheUser(char question[50], void(*callback)()) {
+  char response[10];  
 
-  printf("Do you want to see the printf() samples?\n");
+  printf("%s\n", question);
   scanf("%s", &response);
+  printf("Your response is %s\n", response);  
 
-  printf("Your response is %s", response);
+  if(strcmp(response, "yes") == 0) {
+    (*callback)();
+  }
+
+  return response;
 }
 
 void printSample() {
@@ -43,7 +49,7 @@ void bhaskarasFormula() {
   double x2 = (-b - pow(delta, 0.5)) / 2 * a;
 
   if(delta < 0) {
-    printf("Delta is negative. So the result isn't inside the sef of real numbers!\n");
+    printf("Delta is negative. So the result isn't inside the set of real numbers!\n");
     printf("Delta: %s\n", delta);
     return;
   }
@@ -54,10 +60,35 @@ void bhaskarasFormula() {
   printf("x2 %f\n", x2);
 }
 
-int main() {
-  askForTheUser();
-  printSample();
-  bhaskarasFormula();
+void rating() {
+  int grade = 0;
+  char response[10] = "";
 
+  printf("Let's rate this program!\n");
+  printf("Did you like this program? (y/n)\n");
+  scanf("%s", &response);
+  printf("From 0 to 10, what's your grade for this program?\n");
+  scanf("%d", &grade);
+
+  if(grade == 10 && strcmp(response, "yes") == 0) {
+    printf("Thanks! Fortunately you're very happy :)");
+  } else if(grade > 6 && grade <= 8 && strcmp(response, "yes") == 0) {
+    printf("Thanks! Next time we'll do it better!");
+  } else {
+    printf("It's a shame that you're not happy with our program. But we'll save this for the next time we be able to make you happier ;)");
+  }
+}
+
+int main() {
+  char samplesQuestion[50] = "Do you wanna see some samples?";
+  char bhaskarasQuestion[50] = "Do you wanna use the Bhaskara's calculator?";  
+
+  void (*samplesCallback)() = &printSample;
+  void (*bhaskarasCallback)() = &bhaskarasFormula;
+
+  const char* samplesRes =   askForTheUser(samplesQuestion, samplesCallback);
+  const char* bhaskarasRes = askForTheUser(bhaskarasQuestion, bhaskarasCallback);
+
+  rating();
   return 0;
 }
