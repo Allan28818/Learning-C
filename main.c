@@ -62,20 +62,56 @@ void bhaskarasFormula() {
 
 void rating() {
   int grade = 0;
-  char response[10] = "";
+  char response[10];
 
   printf("Let's rate this program!\n");
-  printf("Did you like this program? (y/n)\n");
+  printf("Do you want to rate this program? (y/n)\n");
   scanf("%s", &response);
-  printf("From 0 to 10, what's your grade for this program?\n");
-  scanf("%d", &grade);
 
-  if(grade == 10 && strcmp(response, "yes") == 0) {
-    printf("Thanks! Fortunately you're very happy :)");
-  } else if(grade > 6 && grade <= 8 && strcmp(response, "yes") == 0) {
-    printf("Thanks! Next time we'll do it better!");
+  if(strcmp(response, "yes") == 0) {
+    printf("From 0 to 10, what's your grade for this program?\n");
+    scanf("%d", &grade);
+
+    switch(grade) {
+      case 0: 
+       printf("We're so sorry, next time we'll do it better! :(\n");
+       break;
+      case 1: 
+       printf("Ok. Next time we'll do it better!\n :/");
+       break;
+      case 2: 
+       printf("Thanks for rating! Next time we'll improve it! :/\n");
+       break;
+      case 3: 
+       printf("Huum... next time you'll want to increase your grade! :/\n");
+       break;
+      case 4: 
+       printf("Thanks for rating! Your feedback is good for us! :|\n");
+       break;
+      case 5: 
+       printf("Thanks! Next time your grade will be the double :)!\n");
+       break;
+      case 6: 
+       printf("We're happy that you send us your feedback! Next time it'll be better :)\n");
+       break;
+      case 7: 
+       printf("Wow! We almost got it! Next time you'll like it! :)\n");
+       break;
+      case 8: 
+       printf("Fine! Your grade keeps us motivaded! :)\n");
+       break;
+      case 9: 
+       printf("Nice! We're happy that you rated us! Next time it'll be a 10 :)\n");
+       break;
+      case 10: 
+       printf("Great! We're pretty happy that you liked our program ;)\n");
+       break;
+      default: 
+        printf("Invalid grade!");
+        break;
+    }
   } else {
-    printf("It's a shame that you're not happy with our program. But we'll save this for the next time we be able to make you happier ;)");
+    printf("Thanks for using it! :)");
   }
 }
 
