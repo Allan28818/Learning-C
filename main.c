@@ -60,6 +60,21 @@ void bhaskarasFormula() {
   printf("x2 %f\n", x2);
 }
 
+void explanation() {
+  char response[10];
+  printf("Do you want to see an explanation about while loops?\n");
+  scanf("%s", &response);
+
+  if(strcmp(response, "yes") == 0) {    
+    char feedback[10];
+    while(strcmp(feedback,"yes")!=0) {
+      printf("While is a statement that we can use in C to run in a determined number of times until a condition stop being satisfied. This condition is a comparision made in a param.\n");
+      printf("Did you get the explanation?\n");
+      scanf("%s",&feedback);
+    }
+  }
+}
+
 void rating() {
   int grade = 0;
   char response[10];
@@ -124,7 +139,7 @@ int main() {
 
   const char* samplesRes =   askForTheUser(samplesQuestion, samplesCallback);
   const char* bhaskarasRes = askForTheUser(bhaskarasQuestion, bhaskarasCallback);
-
+  explanation();
   rating();
   return 0;
 }
