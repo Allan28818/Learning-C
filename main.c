@@ -75,6 +75,21 @@ void explanation() {
   }
 }
 
+void dowhile() {
+  char response [4];
+  printf("Do you want to test the `do-while` command block? \n");
+  scanf("%s", &response);
+
+  if(strcmp(response, "yes") == 0) {
+    int value = 0;
+
+    do {
+      printf("Type an even number to finish \n");
+      scanf("%d", &value);      
+    } while((value % 2)!= 0);
+  }
+}
+
 void rating() {
   int grade = 0;
   char response[10];
@@ -140,6 +155,7 @@ int main() {
   const char* samplesRes =   askForTheUser(samplesQuestion, samplesCallback);
   const char* bhaskarasRes = askForTheUser(bhaskarasQuestion, bhaskarasCallback);
   explanation();
+  dowhile();
   rating();
   return 0;
 }
