@@ -77,7 +77,7 @@ void explanation() {
 
 void dowhile() {
   char response [4];
-  printf("Do you want to test the `do-while` command block? \n");
+  printf("Do you want to test the `do-while` statement?\n");
   scanf("%s", &response);
 
   if(strcmp(response, "yes") == 0) {
@@ -87,6 +87,25 @@ void dowhile() {
       printf("Type an even number to finish \n");
       scanf("%d", &value);      
     } while((value % 2)!= 0);
+  }
+}
+
+void forLoop() {
+  char response[4];
+
+  printf("Do you want to test the `for` statement?\n");
+  scanf("%s", &response);
+
+  if(strcmp(response, "yes") == 0) {
+    int timesToRepeat = 0;
+    int i = 0;
+    
+    printf("Type the amount of times that you want to repeat.\n");
+    scanf("%d", &timesToRepeat);
+
+    for(i = 0; i <= timesToRepeat; i++) {
+      printf("It has been repeting for %d times.\n\n", i);
+    }
   }
 }
 
@@ -156,6 +175,7 @@ int main() {
   const char* bhaskarasRes = askForTheUser(bhaskarasQuestion, bhaskarasCallback);
   explanation();
   dowhile();
+  forLoop();
   rating();
   return 0;
 }
