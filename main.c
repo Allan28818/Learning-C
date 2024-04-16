@@ -2,19 +2,23 @@
 #include <math.h>
 #include <string.h>
 
-const char* askForTheUser(char question[50], void(*callback)()) {
-  char response[10];  
+void askForTheUser(const char* question, void (*callback)(), int maxInputSize) {
+    char response[maxInputSize];
 
-  printf("%s\n", question);
-  scanf("%s", &response);
-  printf("Your response is %s\n", response);  
+    printf("%s\n", question);
 
-  if(strcmp(response, "yes") == 0) {
-    (*callback)();
-  }
+    fgets(response, maxInputSize, stdin);
 
-  return response;
+    // Remover o caractere de nova linha
+    response[strcspn(response, "\n")] = '\0';
+
+    printf("Your response is %s\n\n", response);
+
+    if (strcmp(response, "y") == 0) {
+        (*callback)();
+    }
 }
+
 
 void printSample() {
   printf("\\n Break line \n");
@@ -61,52 +65,35 @@ void bhaskarasFormula() {
 }
 
 void explanation() {
-  char response[10];
-  printf("Do you want to see an explanation about while loops?\n");
-  scanf("%s", &response);
-
-  if(strcmp(response, "yes") == 0) {    
-    char feedback[10];
-    while(strcmp(feedback,"yes")!=0) {
-      printf("While is a statement that we can use in C to run in a determined number of times until a condition stop being satisfied. This condition is a comparision made in a param.\n");
-      printf("Did you get the explanation?\n");
-      scanf("%s",&feedback);
-    }
+  char feedback[10];
+  while(strcmp(feedback,"yes")!=0) {
+    printf("While is a statement that we can use in C to run in a determined number of times until a condition stop being satisfied. This condition is a comparision made in a param.\n");
+    printf("Did you get the explanation?\n");
+    scanf("%s",&feedback);
   }
 }
 
 void dowhile() {
-  char response [4];
-  printf("Do you want to test the `do-while` statement?\n");
-  scanf("%s", &response);
+  int value = 0;
 
-  if(strcmp(response, "yes") == 0) {
-    int value = 0;
-
-    do {
-      printf("Type an even number to finish \n");
-      scanf("%d", &value);      
-    } while((value % 2)!= 0);
-  }
+  do {
+    printf("Type an even number to finish \n");
+    scanf("%d", &value);      
+  } while((value % 2)!= 0);
+  
 }
 
 void forLoop() {
-  char response[4];
+  int timesToRepeat = 0;
+  int i = 0;
+  
+  printf("Type the amount of times that you want to repeat.\n");
+  scanf("%d", &timesToRepeat);
 
-  printf("Do you want to test the `for` statement?\n");
-  scanf("%s", &response);
-
-  if(strcmp(response, "yes") == 0) {
-    int timesToRepeat = 0;
-    int i = 0;
-    
-    printf("Type the amount of times that you want to repeat.\n");
-    scanf("%d", &timesToRepeat);
-
-    for(i = 0; i <= timesToRepeat; i++) {
-      printf("It has been repeting for %d times.\n\n", i);
-    }
+  for(i = 0; i <= timesToRepeat; i++) {
+    printf("It has been repeting for %d times.\n\n", i);
   }
+  
 }
 
 void rating() {
@@ -165,17 +152,27 @@ void rating() {
 }
 
 int main() {
-  char samplesQuestion[50] = "Do you wanna see some samples?";
-  char bhaskarasQuestion[50] = "Do you wanna use the Bhaskara's calculator?";  
+  char samplesQuestion[50] = "Do you want to see some samples? (y/n)";
+  char bhaskarasQuestion[50] = "Do you want to use the Bhaskara's calculator? (y/n)";  
+  char explanationQuestion[50] = "Do you want to see an explanation about for loop? (y/n)";  
+  char dowhileQuestion[50] = "Do you want to test the `do-while` statement? (y/n)";
+  char forLoopQuestion[50] = "Do you want to test the `for` statement? (y/n)";
+
 
   void (*samplesCallback)() = &printSample;
   void (*bhaskarasCallback)() = &bhaskarasFormula;
+  void (*explanationCallback)() = &explanation;
+  void (*dowhileCallback)() = &dowhile;
+  void (*forLoopCallback)() = &forLoop;
 
-  const char* samplesRes =   askForTheUser(samplesQuestion, samplesCallback);
-  const char* bhaskarasRes = askForTheUser(bhaskarasQuestion, bhaskarasCallback);
-  explanation();
-  dowhile();
-  forLoop();
+  const char* response;
+ 
+  askForTheUser(samplesQuestion, samplesCallback, sizeof(response));
+  askForTheUser(bhaskarasQuestion, bhaskarasCallback, sizeof(response));
+  askForTheUser(explanationQuestion, explanationCallback, sizeof(response));
+  askForTheUser(dowhileQuestion, dowhileCallback, sizeof(response));
+  askForTheUser(forLoopQuestion, forLoopCallback, sizeof(response));
+  
   rating();
   return 0;
 }
